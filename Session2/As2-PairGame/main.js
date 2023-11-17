@@ -17,6 +17,7 @@ var scoreCur = 10000;
 var colorTemp = null;
 var elementTemp;
 var waitingFlag = false;
+var isDeath = false;
 
 createBlock(20);
 score(null);
@@ -24,8 +25,8 @@ score(null);
 function block(){
     var p = document.getElementsByClassName("block");
     for(let element = 0; element < p.length; element++) {
-        p[element].style.width = "50px";
-        p[element].style.height = "50px";
+        p[element].style.width = "100px";
+        p[element].style.height = "100px";
         p[element].style.color = "#000";
         p[element].style.borderRadius = "5px";
         p[element].style.border = "2px solid #dadada"
@@ -35,34 +36,50 @@ function block(){
 function blockCover(){
     var p = document.getElementsByClassName("blockCover");
     for(let element = 0; element < p.length; element++) {
-        p[element].style.width = "50px";
-        p[element].style.height = "50px";
+        p[element].style.width = "100px";
+        p[element].style.height = "100px";
         p[element].style.color = "#000";
         p[element].style.borderRadius = "5px";
         p[element].style.border = "2px solid #dadada"
         p[element].addEventListener("click", event => {
             if (!waitingFlag){
-            let choice = logic(p[element].value);
-            if (choice) {
-                p[element].style.opacity = "0";
-                elementTemp = element;
+                let choice = logic(p[element].value);
+                if (choice) {
+                    p[element].style.opacity = "0";
+                    elementTemp = element;
+                }
+                else if (!choice) {
+                    waitingFlag = true;
+                    p[element].style.opacity = "0";
+                    setTimeout(function (){
+                        p[element].style.opacity = "1";
+                        p[elementTemp].style.opacity = "1";
+                        elementTemp = null;
+                        waitingFlag = false;
+                    },1000);
+                }
             }
-            else {
-                p[element].style.opacity = "0";
-                waitingFlag = true;
-                setTimeout(function (){
-                    waitingFlag = false;
-                    p[element].style.opacity = "1";
-                    p[elementTemp].style.opacity = "1";
-                    elementTemp = null;
-                },1000);
-            }
-            console.log("choice: ", p[element].value);
-            console.log(elementTemp);
-        }
-            });
+        });
     }
 }blockCover();
+
+function gameScreen(){
+    var p = document.getElementById('gameScreen');
+    p.style.display = "flex";
+    p.style.justifyContent = "center";
+    p.style.alignItems = "center";
+    //p.style.paddingTop = "50px";
+}gameScreen();
+
+function gameName(){
+    var p = document.getElementById('gameName');
+    p.style.fontSize = "50px";
+    p.style.display = "flex";
+    p.style.justifyContent = "center";
+    p.style.alignContent = "center";
+    p.style.paddingTop = "50px";
+    p.style.paddingBottom = "10px"
+}gameName();
 
 function createBlock(num){
     for(let i = 1; i <= num; i++){
@@ -76,9 +93,6 @@ function createBlock(num){
 
         var divCover = document.createElement("div");
         divCover.classList.add("blockCover");
-        divCover.innerText = i.toString();
-        divCover.style.fontSize = "20px";
-        divCover.style.textAlign = "center";
         divCover.style.background = "#fff"
         divCover.value = RGBToHex(div.style.background);
         var pCover = document.getElementById('coverContainer');
@@ -137,7 +151,31 @@ function logic(color){
 
 function score(match){
     var p = document.getElementById('score');
+    p.style.fontSize = "30px";
+    p.style.display = "flex";
+    p.style.justifyContent = "center";
+    p.style.alignContent = "center";
+    p.style.paddingTop = "10px";
+    p.style.paddingBottom = "40px"
     if(match == true) scoreCur += 1000;
     else if (match ==false)  scoreCur -= 500;
-    p.innerText = scoreCur.toString();
+    p.innerText = "Your Score: " + scoreCur.toString();
 }
+
+function death(){
+    if (scoreCur <= 0) isDeath = true;
+    else isDeath = false;
+}death();
+
+// function screenStart(){
+//     var div = document.createElement("div");
+//     div.setAttribute('id','startScreen');
+//     var p = getElementById("startScreen");
+//     p.style.position = "static";
+//     p.style.width = "1000px";
+//     p.style.height = "1000px";
+//     p.style.background = "#000";
+// }
+
+
+
