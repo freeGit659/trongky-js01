@@ -7,7 +7,7 @@ function time(){
     var hours = curDateClock.getHours();
     var minutes = curDateClock.getMinutes();
     var seconds = curDateClock.getSeconds();
-    rotateHourHand = "rotate("+ (-90+hours*6).toString() +"deg)";
+    rotateHourHand = "rotate("+ (-90+hours*30).toString() +"deg)";
     rotateMinuteHand = "rotate("+ (-90+minutes*6).toString() +"deg)";
     rotateSecondHand = "rotate("+ (-90+seconds*6).toString() +"deg)";
     var p = document.getElementById('time');
