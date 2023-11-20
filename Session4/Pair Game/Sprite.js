@@ -1,13 +1,15 @@
 export class Sprite{
-    constructor(sprite){
-        this.sprite = sprite;
+    constructor(id){
+        this.id = id;
     }
-    setSprite(sprite){
+    setSprite(sprite, container){
         this.sprite = sprite;
         let img = document.createElement('img');
-        img.id = sprite;
         img.src = sprite;
-        document.getElementById('container').appendChild(img);
+        img.id = this.id;
+
+        img.style.position = 'absolute';
+        document.getElementById(container).appendChild(img);
         this.idSprite = img.id;
     }
     getSprite(){ return this.sprite};
@@ -16,8 +18,8 @@ export class Sprite{
         this.width = width;
         this.height = height;
         var img = document.getElementById(this.idSprite);
-        img.style.width = this.width.toString()+"px";
-        img.style.height = this.height.toString()+"px";
+        img.style.width = width.toString()+"px";
+        img.style.height = height.toString()+"px";
     }
     getSize(){
         return [this.width, this.height];
@@ -39,9 +41,8 @@ export class Sprite{
         this.x = x;
         this.y = y;
         var img = document.getElementById(this.idSprite);
-        img.style.transform = "translateX("+this.x+"px)";
-        img.style.transform = "translateY("+this.y+"px)";
-
+        img.style.left = this.x+"px";
+        img.style.top = this.y+"px";
     }
     getPosition(){
         return [this.x, this.y];
