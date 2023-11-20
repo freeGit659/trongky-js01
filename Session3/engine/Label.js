@@ -1,7 +1,9 @@
 export class Label{
-    constructor(t){
+    textLabel = "";
+    constructor(text){
+        this.textLabel = text;
     }
-    get text(){ return this.text;}
+    get text(){ return this.textLab;}
     set text(value){
         this.text = value;
         var element = document.createElement("div");
@@ -11,10 +13,10 @@ export class Label{
     }
 }
 
-// this.x = x;
-// this.y = y;
-// this.width = width;
-// this.height = height;
-// this.scaleX = scaleX;
-// this.scaleY = scaleY;
-// this.active = active;
+// // this.x = x;
+// // this.y = y;
+// // this.width = width;
+// // this.height = height;
+// // this.scaleX = scaleX;
+// // this.scaleY = scaleY;
+// // this.active = active;
