@@ -7,11 +7,15 @@ spawnCard(20);
 
 function shuffleCard(num){
     for(let i = 1; i <= num; i++){
-        cards.push("./img/card"+i+".png");
-        cards.push("./img/card"+i+".png");
+        cards.push("./img/card"+i+".jpg");
+        cards.push("./img/card"+i+".jpg");
     }
+    cards.sort(function() {  
+        return Math.random() - 0.5
+    });
     //console.log(cards);
 }
+
 
 function spawnCard(num){
     let cardTemp = cards;
@@ -28,7 +32,7 @@ function spawnCard(num){
             y += 200;
         }
         numberColum++;
-        card.createCard("card"+i,cardTemp[0], 200, 200, x, y, 1, 1, 0);
+        card.createCard("card"+i,cardTemp[0], 180, 180, x, y, 1, 1, 0);
         console.log(x,y);
         x +=200;
         cardTemp.shift();
