@@ -26,23 +26,41 @@ export class Sprite {
         return [this.width, this.height];
     }
 
-    setPosition(x, y) {
+    set positionX(x){
         this.x = x;
+        var img = document.getElementById(this.idSprite);
+        img.style.left = x + "px";
+    }
+    get positionX(){return this.x}
+
+    set positionY(y){
         this.y = y;
         var img = document.getElementById(this.idSprite);
-        img.style.left = this.x + "px";
         img.style.top = this.y + "px";
     }
-    getPosition() {
-        return [this.x, this.y];
-    }
+    get positionY(){return this.y}
 
-    get scaleX() {return this.scaleX}
+    set positionZ(z){
+        this.z = z;
+        var img = document.getElementById(this.idSprite);
+        img.style.zIndex = z;
+    }
+    get positionZ(){return this.z}
+
+    get scaleX() {return this._scaleX}
 
     set scaleX(scale) {
         this._scaleX = scale;
         var img = document.getElementById(this.idSprite);
         img.style.transform = `scaleX(` + scale + ")";
+    }
+
+    get scaleY() {return this._scaleY}
+
+    set scaleY(scale) {
+        this._scaleY = scale;
+        var img = document.getElementById(this.idSprite);
+        img.style.transform = `scaleY(` + scale + ")";
     }
 
 }

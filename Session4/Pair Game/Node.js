@@ -53,10 +53,10 @@ export class Node{
         var card = new Sprite(id)
         card.setSprite(src, this.id);
         card.setSize(width,height);
-        card.setPosition(x,y);
+        card.positionX = x;
+        card.positionY = y;
+        card.positionZ = 0;
         card.scaleX = scaleX;
-        //card.openEvent();
-        // console.log(this.selected);
     }
 
 }
