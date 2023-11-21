@@ -10,6 +10,7 @@ export class Sprite {
 
         img.style.position = 'absolute';
         img.style.border = "2px solid #0000FF"
+        img.style.borderRadius = "10px";
         document.getElementById(container).appendChild(img);
         this.idSprite = img.id;
     }

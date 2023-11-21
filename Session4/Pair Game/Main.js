@@ -6,8 +6,6 @@ var idCards = [];
 
 shuffleCard(10);
 spawnCard(20);
-selectingCard();
-//clickCard();
 
 function shuffleCard(num){
     for(let i = 1; i <= num; i++){
@@ -27,9 +25,11 @@ function spawnCard(num){
     let x = 0;
     let y = 0;
     let card = new Node('main');
-    card.setPosition(400, 10);
-    for(let i = 1; i <= num ;i ++){
-
+    card.setPosition(100, 10);
+    let i = 1;
+    cardShare();
+    function cardShare(){
+        if (i > num) return;
         if(numberColum >=5){
             numberColum = 0;
             x = 0;
@@ -37,11 +37,36 @@ function spawnCard(num){
         }
         numberColum++;
         idCards[i-1] = i+cardTemp[0]
-        card.createCard(idCards[i-1],"./img/cardCover.jpg", 180, 180, x, y, 1);
+        card.createCard(idCards[i-1],"./img/cardCover.jpg", 180, 180, 0, 0, 1);
+        var cardChild = document.getElementById(idCards[i-1]);
+        const duration = 0.3;
         x +=200;
         cardTemp.shift();
-  
+        i++;
+        gsap.fromTo(cardChild, duration, {x:0,y:0}, {x:x,y:y , onComplete: ()=>{
+            cardShare();
+        }});
+        selectingCard();
     }
+
+    // for(let i = 1; i <= num ;i ++){
+
+    //     if(numberColum >=5){
+    //         numberColum = 0;
+    //         x = 0;
+    //         y += 200;
+    //     }
+    //     numberColum++;
+    //     idCards[i-1] = i+cardTemp[0]
+    //     card.createCard(idCards[i-1],"./img/cardCover.jpg", 180, 180, 0, 0, 1);
+    //     var cardChild = document.getElementById(idCards[i-1]);
+    //     const duration = 5;
+    //     gsap.fromTo(cardChild, duration, {x:50,y:50}, {x:x,y:y});
+   
+    //     x +=200;
+    //     cardTemp.shift();
+  
+    // }
 }
 
 function selectingCard(){
@@ -90,7 +115,7 @@ function selectingCard(){
                         }
                     });
                     isCheckingMatch = false;
-                }, 3000);
+                }, 2000);
             }
             
               function unflipCards() {
@@ -98,7 +123,7 @@ function selectingCard(){
                   flipCardBack(firstCard);
                   flipCardBack(secondCard);
                   isCheckingMatch = false;
-                }, 3000);
+                }, 2000);
               }
             function flipCard(){
                 const duration = 1;
