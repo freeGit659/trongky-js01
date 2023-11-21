@@ -28,6 +28,7 @@ export class Node{
         img.style.transform = "scale("+this.scaleX+","+this.scaleY+")";
         img.style.transform = "rotation("+this.rotation+")";
     }
+
     getTranslate(){
         return [this.scaleX,this.scaleY, this.rotation];
     }
@@ -48,17 +49,15 @@ export class Node{
         this.setPosition(0,0,0);
     }
 
-    createCard(id, src, width, height, x, y, scaleX, scaleY, rotation ){
+    createCard(id, src, width, height, x, y, scaleX){
         var card = new Sprite(id)
         card.setSprite(src, this.id);
         card.setSize(width,height);
         card.setPosition(x,y);
-        card.setTranslate(scaleX, scaleY,rotation);
+        card.scaleX = scaleX;
+        //card.openEvent();
+        // console.log(this.selected);
     }
 
 }
-// var card = new Sprite("test")
-// card.setSprite('./img/card10.png');
-// card.setPosition(200,200);
-// card.setTranslate(1, 1, 0);
 

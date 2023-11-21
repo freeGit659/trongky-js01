@@ -1,8 +1,8 @@
-export class Sprite{
-    constructor(id){
+export class Sprite {
+    constructor(id) {
         this.id = id;
     }
-    setSprite(sprite, container){
+    setSprite(sprite, container) {
         this.sprite = sprite;
         let img = document.createElement('img');
         img.src = sprite;
@@ -13,45 +13,36 @@ export class Sprite{
         document.getElementById(container).appendChild(img);
         this.idSprite = img.id;
     }
-    getSprite(){ return this.sprite};
+    getSprite() { return this.sprite };
 
-    setSize(width, height){
+    setSize(width, height) {
         this.width = width;
         this.height = height;
         var img = document.getElementById(this.idSprite);
-        img.style.width = width.toString()+"px";
-        img.style.height = height.toString()+"px";
+        img.style.width = width.toString() + "px";
+        img.style.height = height.toString() + "px";
     }
-    getSize(){
+    getSize() {
         return [this.width, this.height];
     }
 
-    setTranslate(scaleX, scaleY, rotation){
-        this.scaleX = scaleX
-        this.scaleY = scaleY;
-        this.rotation = rotation;
-        var img = document.getElementById(this.idSprite);
-        img.style.transform = "scale("+this.scaleX+","+this.scaleY+")";
-        img.style.transform = "rotation("+this.rotation+")";
-    }
-    getTranslate(){
-        return [this.scaleX,this.scaleY, this.rotation];
-    }
-
-    setPosition(x, y){
+    setPosition(x, y) {
         this.x = x;
         this.y = y;
         var img = document.getElementById(this.idSprite);
-        img.style.left = this.x+"px";
-        img.style.top = this.y+"px";
+        img.style.left = this.x + "px";
+        img.style.top = this.y + "px";
     }
-    getPosition(){
+    getPosition() {
         return [this.x, this.y];
     }
 
-    setDefault(){
-        this.setTranslate(100,100,1,0);
-        this.setPosition(0,0,0);
+    get scaleX() {return this.scaleX}
+
+    set scaleX(scale) {
+        this._scaleX = scale;
+        var img = document.getElementById(this.idSprite);
+        img.style.transform = `scaleX(` + scale + ")";
     }
 
 }
