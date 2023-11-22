@@ -1,16 +1,15 @@
 var fs = require('fs');
 var path = require("path");
-var sharp = require('sharp');
+const sharp = require('sharp');
 
-//resizeImage('./basics')
-resize('./basics/tilingsky.jpg','./NewFolder/tilingsky.jpg');
+resizeImage('./basics')
 
 function resizeImage(filePath){
     let data = fs.readdirSync(filePath);
     data.forEach(element => {
         let filePathChild = filePath+"/"+element;
         if(fs.statSync(filePathChild).isFile()) {
-            if(checkImage(filePathChild)) resize(filePathChild);
+            if(checkImage(filePathChild)) resize(filePathChild,'./ImageReSize70Percent/'+element);
         }
         else resizeImage(filePathChild);
     });
@@ -27,20 +26,25 @@ function checkImage(filePath){
 }
 
 function resize(filePath,destinationImagePath){
-    var width, height;
-    const image = sharp(filePath);
-    image
-        .metadata()
-        .then(function(metadata) {
-            return image
-            .resize(metadata.width*70/100)
-            .toFile(destinationImagePath, (err) => {
-                if (err) {
-                    console.error('Đã xảy ra lỗi khi thay đổi kích thước ảnh:', err);
-                } else {
-                    console.log('Kích thước ảnh đã được thay đổi thành công.');
-                }
-        })
+    sharp(filePath)
+    .metadata()
+    .then(metadata => {
+        const newWidth = Math.round(metadata.width * 0.7);
+        const newHeight = Math.round(metadata.height * 0.7);
+        sharp(filePath)
+        .resize(newWidth, newHeight)
+        .png({ compressionLevel: 9, force: false })
+        .toFile(destinationImagePath, (err, info) => {
+            if (err) {
+            console.error(err);
+            } else {
+            console.log(info);
+            console.log('Ảnh đã được thay đổi kích thước thành công!');
+            }
+        });
+    })
+    .catch(err => {
+        console.error(err);
     });
 }
 

@@ -1,7 +1,6 @@
 var fs = require('fs');
 var path = require("path");
 
-fs.mkdirSync("./NewFolder");
 copyPngFileToNewFolder('./basics',"./NewFolder")
 
 function copyPngFileToNewFolder(filePath, folder){
