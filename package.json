@@ -1,0 +1,16 @@
+{
+  "name": "ex3-4-5-image",
+  "version": "1.0.0",
+  "description": "",
+  "main": "copyPngFile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "type": "module"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "sharp": "^0.32.6"
+  }
+}
